@@ -1,0 +1,9 @@
+/* CSS declarations go here */
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+body{
+  font-family: "Montserrat" ,sans-serif;
+  background-color: #4D7F17;
+  background-image: linear-gradient(to right, #6BB120, #AEFE57 100%);
+  background-attachment: fixed;
+}
