@@ -5,6 +5,24 @@ import './map.html';
 
 var markerLayer = L.layerGroup([]);
 
+var greenIcon = L.icon({
+    iconUrl: '/images/cursor_green.png',
+    shadowUrl: '/images/cursor_shadow_small.png',
+
+    iconSize:     [21, 59], // size of the icon
+    shadowSize:   [46, 33], // size of the shadow
+    iconAnchor:   [10, 59], // point of the icon which will correspond to marker's location
+    shadowAnchor: [0, 33],  // the same for the shadow
+});
+
+function onLocationFound(e) {
+    L.marker(e.latlng, {icon: greenIcon}).addTo(map);
+}
+
+function onLocationError(e) {
+    alert(e.message);
+}
+
 Template.map.rendered = function() {
     initMap();
     Meteor.subscribe("markers", {
@@ -14,6 +32,11 @@ Template.map.rendered = function() {
     },
     onError: function () { console.log("onError", arguments); }
     });
+
+	map.on('locationfound', onLocationFound);
+
+    map.locate({setView: true, maxZoom: 19});
+
 };
 
 function initMap(){
