@@ -5,6 +5,29 @@ import './map.html';
 
 var markerLayer = L.layerGroup([]);
 
+var customControl =  L.Control.extend({
+
+  options: {
+    position: 'topleft'
+  },
+
+  onAdd: function (map) {
+    var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+    container.style.backgroundColor = 'white';     
+    container.style.backgroundImage = "url(/images/locate.png)";
+    container.style.backgroundSize = "30px 30px";
+    container.style.width = '30px';
+    container.style.height = '30px';
+
+    container.onclick = function(){
+        map.locate({setView: true, maxZoom: 19});
+    }
+
+    return container;
+  }
+});
+
 var greenIcon = L.icon({
     iconUrl: '/images/cursor_green.png',
     shadowUrl: '/images/cursor_shadow_small.png',
@@ -15,8 +38,16 @@ var greenIcon = L.icon({
     shadowAnchor: [0, 33],  // the same for the shadow
 });
 
+var locationMarker;
+
 function onLocationFound(e) {
-    L.marker(e.latlng, {icon: greenIcon}).addTo(map);
+    if (locationMarker == null){
+        locationMarker = L.marker(e.latlng, {icon: greenIcon});
+        locationMarker.addTo(map);
+    }
+    else {
+        locationMarker.setLatLng(e.latlng).update();
+    }
 }
 
 function onLocationError(e) {
@@ -35,7 +66,7 @@ Template.map.rendered = function() {
 
 	map.on('locationfound', onLocationFound);
 
-    map.locate({setView: true, maxZoom: 19});
+    map.locate({setView: true, watch: true,  maxZoom: 19});
 
 };
 
@@ -49,6 +80,7 @@ function initMap(){
         id: 'leon4037.0bo1i1h7',
         accessToken: 'pk.eyJ1IjoibGVvbjQwMzciLCJhIjoiY2lwODdrNWV5MDAzMHV0bm1oamxjejcyaCJ9.oQomGba208ZZcnOslt3D3g'
     }).addTo(map);
+    map.addControl(new customControl());
 }
 
 function updateMapWithCollectionData(){
