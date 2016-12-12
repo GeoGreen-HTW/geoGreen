@@ -1,9 +1,80 @@
 /* CSS declarations go here */
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
-body{
-  font-family: "Montserrat" ,sans-serif;
-  background-color: #4D7F17;
-  background-image: linear-gradient(to right, #6BB120, #AEFE57 100%);
-  background-attachment: fixed;
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: rgba(227, 232, 152, 0.78);
+}
+
+img{
+    width: 4.2em;
+    height: 4.1em;
+}
+
+li{
+    margin-right: 1.5em;
+}
+
+footer {
+    height: 20px;
+    background-image: linear-gradient(to bottom, rgba(116, 214, 87, 0.92), rgba(15, 114, 17, 0.76) 100%);
+    margin-top: 20px;
+    position: relative;
+    bottom: 0 !important;
+    font-size: 10px;
+}
+
+.sitediv{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.map {
+    width: 98.5%;
+    margin: 15px;
+    height: 80%;
+    padding: 5px;
+}
+
+.navbar {
+    height: 85px;
+    padding: 18px;
+    border: none;
+    border-radius: 0;
+    margin: 0 0 25px 0;
+    font-size: 27px;
+    background-image: linear-gradient(to bottom, rgb(234, 255, 213), rgba(104, 192, 78, 0.92) 100%);
+}
+
+.navbar-brand{
+    padding: 0;
+    margin-top: -11px;
+    position: fixed;
+}
+
+.left {
+    width: 33%;
+    float: left;
+    padding: 2px 0 0 10px;
+    margin: 0 auto 0 auto;
+    text-align: left;
+    color: black;
+}
+
+.center {
+    width: 33%;
+    float: left;
+    padding: 2px 0 0 0;
+    margin: 0 auto 0 auto;
+    text-align: center;
+    color: black;
+}
+
+.right {
+    width: auto;
+    float: right;
+    padding: 2px 10px 0 0;
+    margin: 0 auto 0 auto;
+    text-align: right;
+    color: #000000;
 }
