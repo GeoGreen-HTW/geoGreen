@@ -113,3 +113,9 @@ function createMarkersOfCollectionEntities(){
     });
     markerLayer.addTo(map); // add layer with added markers to map
 }
+
+// Account 
+Accounts.ui.config({
+  passwordSignupFields: 'USERNAME_AND_EMAIL'
+});
+
