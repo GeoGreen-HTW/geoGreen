@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { Markers } from '../api/markers.js';
+import { Quests } from '../api/quests.js';
 
 import './map.html';
 
@@ -56,9 +56,9 @@ function onLocationError(e) {
 
 Template.map.rendered = function() {
     initMap();
-    Meteor.subscribe("markers", {
+    Meteor.subscribe("quests", {
     onReady: function () { 
-        console.log("Subscription is ready! Current count of collection is: "+ Markers.find().count());
+        console.log("Subscription is ready! Current count of collection is: "+ Quests.find().count());
         updateMapWithCollectionData();
     },
     onError: function () { console.log("onError", arguments); }
@@ -85,31 +85,31 @@ function initMap(){
 
 function updateMapWithCollectionData(){
     markerLayer.clearLayers(); // delete all existing markers
-    if (Markers.find({}).count() == 0){
+    if (Quests.find({}).count() == 0){
         console.log("Empty, filling Mongo DB");
-        Markers.insert({
+        Quests.insert({
             location: [52.456951, 13.526402], 
             description: "<b>HTW Berlin</b><br>Campus Wilhelminenhof Gebäude C<br>Koordinaten: 52.456951, 13.526402"
         });
-        Markers.insert({
+        Quests.insert({
             location: [52.506322, 13.443618], 
             description: "<b>Mercedes Benz Arena</b><br>Spielort von Alba Berlin & Eisbären Berlin<br>Koordinaten: 52.506322, 13.443618"
         });
-        Markers.insert({
+        Quests.insert({
             location: [52.507968, 13.337746], 
             description: "<b>Zoologischer Garten</b><br>Hardenbergplatz 15, 10623 Berlin, Deutschland<br>Koordinaten: 52.507968, 13.337746"
         });
         console.log("Filled Mongo DB");
-        console.log(Markers.find({}).count());
+        console.log(Quests.find({}).count());
     }
     createMarkersOfCollectionEntities();
 }
 
 function createMarkersOfCollectionEntities(){
-    var markers = Markers.find({}).fetch();
-    console.log("Collection isn't empty! Adding " + Markers.find({}).count() + " entities to map...");
+    var markers = Quests.find({}).fetch();
+    console.log("Collection isn't empty! Adding " + Quests.find({}).count() + " entities to map...");
     markers.forEach(function(marker){
-        var newMarker = L.marker(marker.location, {riseOnHover: true}).bindPopup(marker.description).addTo(markerLayer); // add new marker object for each marker entity in "Markers" collection
+        var newMarker = L.marker(marker.location, {riseOnHover: true}).bindPopup(marker.description).addTo(markerLayer); // add new marker object for each marker entity in "Quests" collection
     });
     markerLayer.addTo(map); // add layer with added markers to map
 }
