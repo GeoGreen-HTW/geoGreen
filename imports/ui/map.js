@@ -54,12 +54,39 @@ function onLocationError(e) {
     alert(e.message);
 }
 
+ genQuest = function() {
+    Quests.insert({ 
+    location: [m_lat, m_long], 
+    title : document.getElementById('title').value,
+    description:document.getElementById('Beschreibung').value,
+    imgpfad:document.getElementById('img').src,
+    Priorität:document.getElementById('prio').value,
+    Arbeitsaufwand:document.getElementById('arbeitsaufwand').value,
+    Zeiteinheit:document.getElementById('zeiteinheit').value,
+    Kosten:document.getElementById('kosten').value});
+
+    map.closePopup();
+    return false;
+}
+
 Template.map.rendered = function() {
     initMap();
     Meteor.subscribe("quests", {
     onReady: function () { 
         console.log("Subscription is ready! Current count of collection is: "+ Quests.find().count());
-        updateMapWithCollectionData();
+
+        Quests.find().observeChanges({
+            added: function (id, fields) {
+                console.log("NEW QUEST");
+                createMarkerForNewQuest(fields);
+            },
+            changed: function (id, fields) {
+                console.log("CHANGED QUEST");
+            },
+            removed: function (id) {
+                console.log("REMOVED QUEST");
+            }
+        });
     },
     onError: function () { console.log("onError", arguments); }
     });
@@ -67,6 +94,43 @@ Template.map.rendered = function() {
 	map.on('locationfound', onLocationFound);
 
     map.locate({setView: true, watch: true,  maxZoom: 19});
+
+    map.on('dblclick', function(event)
+    {
+        m_long = event.latlng.lng;
+        m_lat = event.latlng.lat;
+        var current_pos = event.latlng.lat +','+event.latlng.lng;
+        var list = "<form action='return genQuest()' method='POST'>"+
+        "<label for='Aktuelle Position'> Aktuelle Position: </label>"+
+        "<label>"+ current_pos+"</label></br>"+
+        "<label for='Titel'>Titel:</label>"+
+        "<input type='text' name='title' id='title' placeholder='Titel' required autofocus /><br>"+
+        "<img id='img' src='/images/bild_hochladen.gif' onclick='return uploadImg()'></img>"+
+        "<label for='Beschreibung'>Beschreibung:</label>"+
+        "<input type='text' name='Beschreibung' id='Beschreibung' placeholder='Beschreibung' required/><br>"+
+        "<label for='Prioritaet'>Priorität:</label>"+
+        "<select name='prio' id='prio'>"+
+			"<option value='Dringend'>Dringend</option>"+
+			"<option value='Hoch'>Hoch</option>"+
+			"<option value='Normal'>Normal</option>"+
+			"<option value='Niedrig'>Niedrig</option>"+
+		"</select></br>"+
+        "<label for='Aufwand'>Arbeitsaufwand:</label>"+
+        "<input type='text' name='arbeitsaufwand' id='arbeitsaufwand' placeholder='Arbeitsaufwand' ><select name='aufwandzeiteinheit' id='zeiteinheit'>"+
+			"<option value='Stunden'>Stunden</option>"+
+			"<option value='Tag'>Tage</option>"+
+			"<option value='Monat'>Monate</option>"+
+			"<option value='Jahr'>Jahre</option>"+
+		"</select></br>"+
+        "<label for='Kosten'>Kosten in Euro:</label>"+
+        "<input type='text' name='kosten' id='kosten' placeholder='Kosten in Euro'/><br>"+
+        "<button onclick='return genQuest()'>Erstellen</button>" +
+        "</form>";
+
+        var popup = L.popup();
+        popup.setLatLng(event.latlng).setContent(list).openOn(map);
+        
+    });
 
 };
 
@@ -105,11 +169,8 @@ function updateMapWithCollectionData(){
     createMarkersOfCollectionEntities();
 }
 
-function createMarkersOfCollectionEntities(){
-    var markers = Quests.find({}).fetch();
-    console.log("Collection isn't empty! Adding " + Quests.find({}).count() + " entities to map...");
-    markers.forEach(function(marker){
-        var newMarker = L.marker(marker.location, {riseOnHover: true}).bindPopup(marker.description).addTo(markerLayer); // add new marker object for each marker entity in "Quests" collection
-    });
+
+function createMarkerForNewQuest(fields){
+    var newMarker = L.marker(fields.location, {riseOnHover: true}).bindPopup(fields.description).addTo(markerLayer); // add new marker object for each marker entity in "Quests" collection
     markerLayer.addTo(map); // add layer with added markers to map
 }
