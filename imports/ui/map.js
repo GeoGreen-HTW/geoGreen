@@ -394,7 +394,7 @@ function createMarkerForNewQuest(id,fields){
          var aw =  document.getElementById('db_aufwand').innerHTML;
          var ze = document.getElementById('db_zeiteinheit').innerHTML;
          var k = document.getElementById('db_kosten').innerHTML;
-         var newQ = Quests.findOne({ location: m_fields.location });
+         var newQ = Quests.findOne({ location: -m_fields.location });
          Quests.update({_id : newQ._id},{$set:{Status : status, _title: tit,
          _description:des,
          _Priorität:pr,
