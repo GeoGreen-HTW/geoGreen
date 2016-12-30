@@ -55,15 +55,19 @@ function onLocationError(e) {
 }
 
  genQuest = function() {
-    Quests.insert({ 
-    location: [m_lat, m_long], 
-    title : document.getElementById('title').value,
-    description:document.getElementById('Beschreibung').value,
-    imgpfad:document.getElementById('img').src,
-    Priorität:document.getElementById('prio').value,
-    Arbeitsaufwand:document.getElementById('arbeitsaufwand').value,
-    Zeiteinheit:document.getElementById('zeiteinheit').value,
-    Kosten:document.getElementById('kosten').value});
+
+    var newQuest = { 
+        location: [m_lat, m_long], 
+        title : document.getElementById('title').value,
+        description:document.getElementById('Beschreibung').value,
+        imgpfad:document.getElementById('img').src,
+        Priorität:document.getElementById('prio').value,
+        Arbeitsaufwand:document.getElementById('arbeitsaufwand').value,
+        Zeiteinheit:document.getElementById('zeiteinheit').value,
+        Kosten:document.getElementById('kosten').value,
+    };
+
+    Meteor.call('quests.insert', newQuest);
 
     map.closePopup();
     return false;
