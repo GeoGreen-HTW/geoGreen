@@ -2,27 +2,44 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 body {
-    font-family: "Montserrat", sans-serif;
     background-color: rgba(227, 232, 152, 0.78);
+    font-family: "Montserrat", sans-serif;
 }
 
-img{
-    width: 4.2em;
-    height: 4.1em;
+/* ------------ navigation --------------- */
+
+.navbar {
+    height: 70px;
+    padding: 10px;
+    border: none;
+    border-radius: 0;
+    margin: 0 0 25px 0;
+    font-size: 27px;
+    background-image: linear-gradient(to bottom, rgb(234, 255, 213), rgba(104, 192, 78, 0.92) 100%);
 }
 
 li{
     margin-right: 1.5em;
 }
+/* ------------------- ende ----------------- */
 
-footer {
-    height: 20px;
-    background-image: linear-gradient(to bottom, rgba(116, 214, 87, 0.92), rgba(15, 114, 17, 0.76) 100%);
-    margin-top: 20px;
+
+/* ------------ logo -------- */
+img{
+    width: 3.5em;
+    height: 3.4em;
     position: relative;
-    bottom: 0 !important;
-    font-size: 10px;
 }
+
+.navbar-brand{
+    padding: 0;
+    margin-top: -5px;
+    position: fixed;
+}
+/* ------------------- ende ----------------- */
+
+
+/* ------------karte--------------- */
 
 .sitediv{
     padding-left: 20px;
@@ -31,25 +48,22 @@ footer {
 
 .map {
     width: 98.5%;
-    margin: 15px;
+    margin: 30px 15px 15px 15px;
     height: 80%;
     padding: 5px;
 }
 
-.navbar {
-    height: 85px;
-    padding: 18px;
-    border: none;
-    border-radius: 0;
-    margin: 0 0 25px 0;
-    font-size: 27px;
-    background-image: linear-gradient(to bottom, rgb(234, 255, 213), rgba(104, 192, 78, 0.92) 100%);
-}
+/* ------------------- ende ----------------- */
 
-.navbar-brand{
-    padding: 0;
-    margin-top: -11px;
-    position: fixed;
+
+/* ------------------Footer--------------- */
+footer {
+    height: 20px;
+    background-image: linear-gradient(to bottom, rgba(116, 214, 87, 0.92), rgba(15, 114, 17, 0.76) 100%);
+    margin-top: 15px;
+    position: relative;
+    bottom: 0 !important;
+    font-size: 10px;
 }
 
 .left {
@@ -78,3 +92,4 @@ footer {
     text-align: right;
     color: #000000;
 }
+/* ------------------- ende ----------------- */
