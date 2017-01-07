@@ -7,3 +7,5 @@ Meteor.startup(function() {
   });
   $(window).resize(); // trigger resize event 
 });
+
+//Meteor.subscribe("userData");

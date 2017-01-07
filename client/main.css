@@ -7,3 +7,7 @@ body{
   background-image: linear-gradient(to right, #6BB120, #AEFE57 100%);
   background-attachment: fixed;
 }
+
+.loginButt {
+    margin-left:1000px
+}
