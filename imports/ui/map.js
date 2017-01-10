@@ -1,10 +1,14 @@
 import { Template } from 'meteor/templating';
 import { Quests } from '../api/quests.js';
+import { Blaze } from 'meteor/blaze';
+import { Session } from 'meteor/session';
 
+import './createPopup.js';
+import './displayPopup.js';
 import './map.html';
 
 var markerLayer = L.layerGroup([]);
-var m_fields,m_id;
+var m_fields, m_id;
 var customControl =  L.Control.extend({
 
   options: {
@@ -54,25 +58,6 @@ function onLocationError(e) {
     alert(e.message);
 }
 
-//  genQuest = function() {
-
-//     var newQuest = { 
-//         location: [m_lat, m_long], 
-//         title : document.getElementById('title').value,
-//         description:document.getElementById('Beschreibung').value,
-//         imgpfad:document.getElementById('img').src,
-//         Priorität:document.getElementById('prio').value,
-//         Arbeitsaufwand:document.getElementById('arbeitsaufwand').value,
-//         Zeiteinheit:document.getElementById('zeiteinheit').value,
-//         Status: "offen",
-//         Kosten:document.getElementById('kosten').value,
-//     };
-
-//     Meteor.call('quests.insert', newQuest);
-
-//     map.closePopup();
-//     return false;
-// }
 
 Template.map.events({
   'submit .createForm'(event) {
@@ -102,6 +87,12 @@ Template.map.events({
     event.preventDefault();
     editQuest();
   },
+
+  'click .annehmen'(event) {
+    var openQuestId = Session.get('openQuestId');
+    Meteor.call('quests.take', openQuestId, "bearbeitung");
+    console.log("Quest (" + openQuestId + ") angenommen");
+  },
 });
 
 Template.map.rendered = function() {
@@ -117,6 +108,7 @@ Template.map.rendered = function() {
             },
             changed: function (id, fields) {
                 console.log("CHANGED QUEST");
+                updateQuestPopUpWithMongoDbData(id, fields);
             },
             removed: function (id) {
                 console.log("REMOVED QUEST");
@@ -134,55 +126,25 @@ Template.map.rendered = function() {
     {
         m_long = event.latlng.lng;
         m_lat = event.latlng.lat;
-        var current_pos = event.latlng.lat +','+event.latlng.lng;
-        var list = "<form class='createForm' method='POST'>"+
-        "<table>"+
-            "<tr>"+
-                "<th><label for='Aktuelle Position'> Aktuelle Position:</label></th>"+
-                "<td><label>"+ current_pos+"</label></td>"+
-            "</tr>"+
-            "<tr>"+
-                "<th><label for='Titel'>Titel:</label></th>"+
-                "<td><input type='text' name='title' id='title' placeholder='Titel' required autofocus /><td>"+
-            "</tr>"+
-        "</table>"+
-        "<img id='img' src='/images/bild_hochladen.gif' onclick='return uploadImg()'></img>"+
-        "<table>"+
-            "<tr>"+
-                "<th><label for='Beschreibung'>Beschreibung:</label></th>"+
-                "<td><input type='text' name='Beschreibung' id='Beschreibung' placeholder='Beschreibung' required/></td>"+
-            "</tr>"+
-            "<tr>"+
-                "<th><label for='Prioritaet'>Priorität:</label></th>"+
-                    "<td><select name='prio' id='prio'>"+
-                        "<option value='Dringend'>Dringend</option>"+
-                        "<option value='Hoch'>Hoch</option>"+
-                        "<option value='Normal'>Normal</option>"+
-                        "<option value='Niedrig'>Niedrig</option>"+
-                    "</select></td>"+
-            "</tr>"+
-            "<tr>"+
-                "<th><label for='Aufwand'>Arbeitsaufwand:</label></th>"+
-                "<td><input type='text' name='arbeitsaufwand' id='arbeitsaufwand' placeholder='Arbeitsaufwand' ><select name='aufwandzeiteinheit' id='zeiteinheit'>"+
-                    "<option value='Stunden'>Stunden</option>"+
-                    "<option value='Tag'>Tage</option>"+
-                    "<option value='Monat'>Monate</option>"+
-                    "<option value='Jahr'>Jahre</option>"+
-                "</select></td>"+
-            "</tr>"+
-            "<tr>"+
-                "<th><label for='Kosten'>Kosten in Euro:</label></th>"+
-                "<td><input type='text' name='kosten' id='kosten' placeholder='Kosten in Euro'/><td>"+
-            "</tr>"+
-            "<tr>"+
-                "<td><button type='submit'>Erstellen</button></td>" +
-            "</tr>"+
-        "</table>"+
-        "</form>";
+        Session.set({ m_long: m_long , m_lat: m_lat});
+
+        var newContent2 = Blaze.toHTML(Template.createPopup);
 
         var popup = L.popup();
-        popup.setLatLng(event.latlng).setContent(list).openOn(map);
+        popup.setLatLng(event.latlng).setContent(newContent2).openOn(map);
         
+    });
+
+    map.on('popupopen', function(e) {
+        if (e.popup._source != undefined){
+            Session.set("markerWithOpenPopUpId", e.popup._source._leaflet_id);
+            Session.set("openQuestId", e.popup._source.questId);
+        }
+    });
+
+    map.on('popupclose', function(e) {
+            Session.set("markerWithOpenPopUpId", undefined);
+            Session.set("openQuestId", undefined);
     });
 
 };
@@ -200,79 +162,30 @@ function initMap(){
     map.addControl(new customControl());
 }
 
-function updateMapWithCollectionData(){
-    markerLayer.clearLayers(); // delete all existing markers
-    if (Quests.find({}).count() == 0){
-        console.log("Empty, filling Mongo DB");
-        Quests.insert({
-            location: [52.456951, 13.526402], 
-            description: "<b>HTW Berlin</b><br>Campus Wilhelminenhof Gebäude C<br>Koordinaten: 52.456951, 13.526402"
-        });
-        Quests.insert({
-            location: [52.506322, 13.443618], 
-            description: "<b>Mercedes Benz Arena</b><br>Spielort von Alba Berlin & Eisbären Berlin<br>Koordinaten: 52.506322, 13.443618"
-        });
-        Quests.insert({
-            location: [52.507968, 13.337746], 
-            description: "<b>Zoologischer Garten</b><br>Hardenbergplatz 15, 10623 Berlin, Deutschland<br>Koordinaten: 52.507968, 13.337746"
-        });
-        console.log("Filled Mongo DB");
-        console.log(Quests.find({}).count());
-    }
-    createMarkersOfCollectionEntities();
+function updateQuestPopUpWithMongoDbData(id, fields){
+        Session.set('m_id', id);
+        var content = Blaze.toHTML(Template.displayPopup);
+        var state = document.getElementById('state');
+        state.value = fields.Status;
+
+        var markerWithOpenPopUp = markerLayer.getLayer(Session.get('markerWithOpenPopUpId'));
+        markerWithOpenPopUp._popup.setContent(content);
 }
 
 
 function createMarkerForNewQuest(id,fields){
-    m_fields = fields;
-    m_id = id;
-     var list = "<form class='popUpForm' method='GET'>"+
-        "<center><big><label id='db_title' >"+fields.title+"</label></big></center>"+
-        "<table>"+
-            "<tr>"+
-                "<th><label for='Aktuelle Position'> Aktuelle Position:</label></th>"+
-                "<td><label>"+ fields.location+"</label></td>"+
-            "</tr>"+
-        "</table>"+
-        "<img id='img' src='"+ fields.imgpfad+"'></img><br>"+
-        "<table>"+
-            "<tr>"+
-                "<th><label>Beschreibung:</label></th>"+
-                "<td><label for='Beschreibung' id='db_beschreibung'>"+fields.description+"</label></td>"+
-            "</tr>"+
-            "<tr>"+
-                "<th><label>Priorität:</label></th>"+
-                "<td><label for='Prioritaet' id='db_prio'>"+fields.Priorität+"</label></td>"+
-            "</tr>"+
-            "<tr>"+
-                "<th><label>Arbeitsaufwand:</label></th>"+
-                "<td><label for='Aufwand' id='db_aufwand'>"+fields.Arbeitsaufwand +"</label><label id='db_zeiteinheit'> "+ fields.Zeiteinheit+"</label></td>"+
-            "</tr>"+
-            "<tr>"+
-                "<th><label>Kosten in Euro</label></th>"+
-                "<td><label for='Kosten' id='db_kosten'>"+fields.Kosten+"</label></td>"+
-            "</tr>"+
-            "<tr>"+
-                "<th><label>Status:</label></th>"+
-                "<td>"+
-                "<select disabled name='state' id='state'>"+
-                    "<option value='offen'>Offen</option>"+
-                    "<option value='bearbeitung'>In Bearbeitung</option>"+
-                    "<option value='erledigt'>Erledigt</option>"+
-                "</select></td>"+
-            "</tr>"+
-            "<tr>"+
-                "<td><input value='Bearbeiten' id='bearbeiten' type='submit' ></input></td>" +
-            "</tr>"+
-        "<table>"+
-        "</form>";
-    var newMarker = L.marker(fields.location, {riseOnHover: true}).bindPopup(list).addTo(markerLayer); // add new marker object for each marker entity in "Quests" collection
+    Session.set('m_id', id);
+
+    var content = Blaze.toHTML(Template.displayPopup);
+    var newMarker = L.marker(fields.location, {riseOnHover: true}).bindPopup(content).addTo(markerLayer); // add new marker object for each marker entity in "Quests" collection
+    newMarker.questId = id;
+
     markerLayer.addTo(map); // add layer with added markers to map
 }
 
 
  editQuest = function() {
-     
+     console.log("CALLED METHOD");
      if(document.getElementById("bearbeiten").value == "Bearbeiten")
      {
         
@@ -368,76 +281,18 @@ function createMarkerForNewQuest(id,fields){
          document.getElementById("state").disabled = true;
          document.getElementById("bearbeiten").value = "Bearbeiten";
 
-         //Labels erstellen
-
-         //Titel
-         var title_label = document.createElement("label");
-         title_label.setAttribute("id","db_title");
-         title_label.innerHTML =document.getElementById("edit_title").value;
-         
-         var _title = document.getElementById("edit_title");
-         var parenttitle = _title.parentNode;
-         parenttitle.replaceChild(title_label,_title);
-
-         //Beschreibung
-         var beschreibung_label = document.createElement("label");
-         beschreibung_label.setAttribute("id","db_beschreibung");
-         beschreibung_label.innerHTML =document.getElementById("edit_beschreibung").value;
-         var _beschreibung = document.getElementById("edit_beschreibung");
-         var parentbeschreibung = _beschreibung.parentNode;
-         parentbeschreibung.replaceChild(beschreibung_label,_beschreibung);
-
-         //Priorität
-         var prio_label = document.createElement("label");
-         prio_label.setAttribute("id","db_prio");
-         prio_label.innerHTML =document.getElementById("edit_prio").value;
-         var _prio = document.getElementById("edit_prio");
-         var parentprio = _prio.parentNode;
-         parentprio.replaceChild(prio_label,_prio);
-         
-         //Aufwand
-         var aufwand_label = document.createElement("label");
-         aufwand_label.setAttribute("id","db_aufwand");
-         aufwand_label.innerHTML =document.getElementById("edit_aufwand").value;
-         var _aufwand = document.getElementById("edit_aufwand");
-         var parentaufwand = _aufwand.parentNode;
-         parentaufwand.replaceChild(aufwand_label,_aufwand);
-
-         //Zeiteinheit
-         var zeit_label = document.createElement("label");
-         zeit_label.setAttribute("id","db_zeiteinheit");
-         zeit_label.innerHTML =document.getElementById("edit_zeit").value;
-         var _zeit = document.getElementById("edit_zeit");
-         var parentzeit = _zeit.parentNode;
-         parentzeit.replaceChild(zeit_label,_zeit);
-
-         //Kosten
-         var kosten_label = document.createElement("label");
-         kosten_label.setAttribute("id","db_kosten");
-         kosten_label.innerHTML =document.getElementById("edit_kosten").value;
-         var _kosten = document.getElementById("edit_kosten");
-         var parentkosten = _kosten.parentNode;
-         parentkosten.replaceChild(kosten_label,_kosten);
 
          //Update Datenbank
          var status = document.getElementById("state").value;
-         var tit = document.getElementById("db_title").innerHTML;
-         var des = document.getElementById('db_beschreibung').innerHTML;
-         var pr = document.getElementById('db_prio').innerHTML;
-         var aw =  document.getElementById('db_aufwand').innerHTML;
-         var ze = document.getElementById('db_zeiteinheit').innerHTML;
-         var k = document.getElementById('db_kosten').innerHTML;
-         Quests.update(
-             {_id :m_id},
-             {$set: {
-                    Status : status, _title: tit,
-                    _description:des,
-                    _Priorität:pr,
-                    _Arbeitsaufwand:aw,
-                    _Zeiteinheit:ze,
-                    _Kosten:k
-                }
-            });
+         var tit = document.getElementById("edit_title").value;
+         var des = document.getElementById('edit_beschreibung').value;
+         var pr = document.getElementById('edit_prio').value;
+         var aw =  document.getElementById('edit_aufwand').value;
+         var ze = document.getElementById('edit_zeit').value;
+         var k = document.getElementById('edit_kosten').value;
+         
+         var questId = Session.get('openQuestId');
+         Meteor.call("quests.update", questId, status, tit, des, pr, aw, ze, k);
      }
      //
     return false;
