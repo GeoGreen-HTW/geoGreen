@@ -4,11 +4,11 @@ import { Blaze } from 'meteor/blaze';
 import { Session } from 'meteor/session';
 
 import './createPopup.js';
+import './editPopup.js';
 import './displayPopup.js';
 import './map.html';
 
 var markerLayer = L.layerGroup([]);
-var m_fields, m_id;
 var customControl =  L.Control.extend({
 
   options: {
@@ -188,88 +188,17 @@ function createMarkerForNewQuest(id,fields){
      console.log("CALLED METHOD");
      if(document.getElementById("bearbeiten").value == "Bearbeiten")
      {
-        
-        ///Summary Begin
-        //Die jeweiligen Labels werden durch Inputs bzw. Select ersetzt.
-        //Dadurch ist der Benutzer in der Lage, den Quest zu bearbeiten.
-        ///Summary End
-         document.getElementById("bearbeiten").value = "aktualisieren";
-         document.getElementById("state").disabled = false;
-         //Titel
-         var title_input = document.createElement("input");
-         title_input.setAttribute("id","edit_title");
-         title_input.setAttribute("type","text");
-         title_input.setAttribute("value",document.getElementById("db_title").innerHTML);
-         title_input.required = true;
-         var title_label = document.getElementById("db_title");
-         var parentLabel = title_label.parentNode;
-         parentLabel.replaceChild(title_input,title_label);
+        var questId = Session.get('m_id');
+        var selectedQuest = Quests.findOne({ _id: questId  });
 
-         //Beschreibung
-         var beschreibung_input = document.createElement("input");
-         beschreibung_input.setAttribute("id","edit_beschreibung");
-         beschreibung_input.setAttribute("type","text");
-         beschreibung_input.setAttribute("value",document.getElementById("db_beschreibung").innerHTML);
-         beschreibung_input.required = true;
-         var beschreibung_label = document.getElementById("db_beschreibung");
-         var parentbeschreibung = beschreibung_label.parentNode;
-         parentbeschreibung.replaceChild(beschreibung_input,beschreibung_label);
+        var content = Blaze.toHTMLWithData(Template.editPopup, selectedQuest);
 
-         //Prioritaet
-         var Prioritaet_input = document.createElement("select");
-         Prioritaet_input.setAttribute("id","edit_prio");
-         Prioritaet_input.setAttribute("type","text");
-         var option = document.createElement("option");
-         option.text = "Dringend";
-         Prioritaet_input.add(option);
-         var option1 = document.createElement("option");
-         option1.text = "Hoch";
-         Prioritaet_input.add(option1);
-         var option2 = document.createElement("option");
-         option2.text = "Normal";
-         Prioritaet_input.add(option2);
-         var option3 = document.createElement("option");
-         option3.text = "Niedrig";
-         Prioritaet_input.add(option3);
-         var prio_label = document.getElementById("db_prio");
-         var parentprio = prio_label.parentNode;
-         parentprio.replaceChild(Prioritaet_input,prio_label);
-
-         //Aufwand
-         var aufwand_input = document.createElement("input");
-         aufwand_input.setAttribute("id","edit_aufwand");
-         aufwand_input.setAttribute("type","text");
-         aufwand_input.setAttribute("value",document.getElementById("db_aufwand").innerHTML);
-         var aufwand_label = document.getElementById("db_aufwand");
-         var parentaufwand = aufwand_label.parentNode;
-         parentaufwand.replaceChild(aufwand_input,aufwand_label);
-
-         //Zeiteinheit
-         var zeit_input = document.createElement("select");
-         zeit_input.setAttribute("id","edit_zeit");
-         zeit_input.setAttribute("type","text");
-         var option = document.createElement("option");
-         option.text = "Stunden";
-         zeit_input.add(option);
-         var option1 = document.createElement("option");
-         option1.text = "Monate";
-         zeit_input.add(option1);
-         var option2 = document.createElement("option");
-         option2.text = "Jahre";
-         zeit_input.add(option2);
-         var zeit_label = document.getElementById("db_zeiteinheit");
-         var parentzeit = zeit_label.parentNode;
-         parentzeit.replaceChild(zeit_input,zeit_label);
-
-         //Kosten
-         var kosten_input = document.createElement("input");
-         kosten_input.setAttribute("id","edit_kosten");
-         kosten_input.setAttribute("type","text");
-         kosten_input.setAttribute("value",document.getElementById("db_kosten").innerHTML);
-         var kosten_label = document.getElementById("db_kosten");
-         var parentkosten = kosten_label.parentNode;
-         parentkosten.replaceChild(kosten_input,kosten_label);
-
+        var markerWithOpenPopUp = markerLayer.getLayer(Session.get('markerWithOpenPopUpId'));
+        markerWithOpenPopUp._popup.setContent(content);
+        document.getElementById("edit_prio").value = selectedQuest.Priorität;
+        document.getElementById("edit_zeit").value = selectedQuest.Zeiteinheit;
+        document.getElementById("state").value = selectedQuest.Status;
+        document.getElementById("state").disabled = true;
      }
      else
      {
