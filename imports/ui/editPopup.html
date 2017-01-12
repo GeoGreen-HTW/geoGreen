@@ -1,6 +1,5 @@
 <template name="editPopup" id="editPopup">
     <form class="popUpForm" method="GET">
-        {{#with quest}}
         <center><big><input id="edit_title" type="text" value="{{title}}" required=""></big></center>
         <table>
             <tbody><tr>
@@ -51,13 +50,12 @@
             </tr>
             <tr>
                  <th><label>Bearbeiter:</label></th>
-                 <td><label for="assigneeName" id="db_assigneeName" value="{{assigneeName}}"></label></td>
+                 <td><label for="assigneeName" id="db_assigneeName" >{{assigneeName}}</label></td>
              </tr>
             <tr>
                 <td><input value="aktualisieren" id="bearbeiten" type="submit"></td>
                 <td><input value="Quest Annehmen" class="annehmen" type="button"></td>
             </tr>
             </tbody></table>
-        {{/with}}
     </form>
 </template>

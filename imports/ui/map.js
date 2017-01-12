@@ -8,7 +8,7 @@ import './editPopup.js';
 import './displayPopup.js';
 import './map.html';
 
-var markerLayer = L.layerGroup([]);
+markerLayer = L.layerGroup([]);
 var customControl =  L.Control.extend({
 
   options: {
@@ -58,43 +58,6 @@ function onLocationError(e) {
     alert(e.message);
 }
 
-
-Template.map.events({
-  'submit .createForm'(event) {
-    // Prevent default browser form submit
-    event.preventDefault();
-
-    var newQuest = { 
-        location: [m_lat, m_long], 
-        title : document.getElementById('title').value,
-        description:document.getElementById('Beschreibung').value,
-        imgpfad:document.getElementById('img').src,
-        Priorität:document.getElementById('prio').value,
-        Arbeitsaufwand:document.getElementById('arbeitsaufwand').value,
-        Zeiteinheit:document.getElementById('zeiteinheit').value,
-        Status: "offen",
-        Kosten:document.getElementById('kosten').value,
-    };
-
-    Meteor.call('quests.insert', newQuest);
-
-    map.closePopup();
-    console.log("Quest created!");
-  },
-
-  'submit .popUpForm'(event) {
-    // Prevent default browser form submit
-    event.preventDefault();
-    editQuest();
-  },
-
-  'click .annehmen'(event) {
-    var openQuestId = Session.get('openQuestId');
-    Meteor.call('quests.take', openQuestId, "bearbeitung");
-    console.log("Quest (" + openQuestId + ") angenommen");
-  },
-});
-
 Template.map.rendered = function() {
     initMap();
     Meteor.subscribe("quests", {
@@ -128,10 +91,12 @@ Template.map.rendered = function() {
         m_lat = event.latlng.lat;
         Session.set({ m_long: m_long , m_lat: m_lat});
 
-        var newContent2 = Blaze.toHTML(Template.createPopup);
+        var parent = document.createElement("div");
+        parent.id = "popupContainer";
+        Blaze.render(Template.createPopup, parent);
 
         var popup = L.popup();
-        popup.setLatLng(event.latlng).setContent(newContent2).openOn(map);
+        popup.setLatLng(event.latlng).setContent(parent).openOn(map);
         
     });
 
@@ -164,67 +129,35 @@ function initMap(){
 
 function updateQuestPopUpWithMongoDbData(id, fields){
         Session.set('m_id', id);
-        var content = Blaze.toHTML(Template.displayPopup);
+
+        var selectedQuest = Quests.findOne({ _id: id  });
+        
+        var parent = document.createElement("div");
+        parent.id = "popupContainer";
+        Blaze.renderWithData(Template.displayPopup, selectedQuest, parent);
+
         var state = document.getElementById('state');
         state.value = fields.Status;
 
         var markerWithOpenPopUp = markerLayer.getLayer(Session.get('markerWithOpenPopUpId'));
-        markerWithOpenPopUp._popup.setContent(content);
+        markerWithOpenPopUp._popup.setContent(parent);
 }
 
 
 function createMarkerForNewQuest(id,fields){
     Session.set('m_id', id);
 
-    var content = Blaze.toHTML(Template.displayPopup);
-    var newMarker = L.marker(fields.location, {riseOnHover: true}).bindPopup(content).addTo(markerLayer); // add new marker object for each marker entity in "Quests" collection
+    var selectedQuest = Quests.findOne({ _id: id  });
+
+    var parent = document.createElement("div");
+    parent.id = "popupContainer";
+
+    Blaze.renderWithData(Template.displayPopup, selectedQuest, parent);
+
+    var newMarker = L.marker(fields.location, {riseOnHover: true}).bindPopup(parent).addTo(markerLayer); // add new marker object for each marker entity in "Quests" collection
     newMarker.questId = id;
 
     markerLayer.addTo(map); // add layer with added markers to map
-}
-
-
- editQuest = function() {
-     console.log("CALLED METHOD");
-     if(document.getElementById("bearbeiten").value == "Bearbeiten")
-     {
-        var questId = Session.get('m_id');
-        var selectedQuest = Quests.findOne({ _id: questId  });
-
-        var content = Blaze.toHTMLWithData(Template.editPopup, selectedQuest);
-
-        var markerWithOpenPopUp = markerLayer.getLayer(Session.get('markerWithOpenPopUpId'));
-        markerWithOpenPopUp._popup.setContent(content);
-        document.getElementById("edit_prio").value = selectedQuest.Priorität;
-        document.getElementById("edit_zeit").value = selectedQuest.Zeiteinheit;
-        document.getElementById("state").value = selectedQuest.Status;
-        document.getElementById("state").disabled = true;
-     }
-     else
-     {
-         ///Summary Begin
-         // Die vom Nutzer bearbeiteten Elemente werden in Labels umgewandelt und in die Datenbank aktualisiert.
-         ///Summary End
-
-         //Button aktualisieren -> Zurück  zu bearbeiten
-         document.getElementById("state").disabled = true;
-         document.getElementById("bearbeiten").value = "Bearbeiten";
-
-
-         //Update Datenbank
-         var status = document.getElementById("state").value;
-         var tit = document.getElementById("edit_title").value;
-         var des = document.getElementById('edit_beschreibung').value;
-         var pr = document.getElementById('edit_prio').value;
-         var aw =  document.getElementById('edit_aufwand').value;
-         var ze = document.getElementById('edit_zeit').value;
-         var k = document.getElementById('edit_kosten').value;
-         
-         var questId = Session.get('openQuestId');
-         Meteor.call("quests.update", questId, status, tit, des, pr, aw, ze, k);
-     }
-     //
-    return false;
 }
 
 // Account 
