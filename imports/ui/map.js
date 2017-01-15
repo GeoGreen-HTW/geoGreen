@@ -136,9 +136,6 @@ function updateQuestPopUpWithMongoDbData(id, fields){
         parent.id = "popupContainer";
         Blaze.renderWithData(Template.displayPopup, selectedQuest, parent);
 
-        var state = document.getElementById('state');
-        state.value = fields.Status;
-
         var markerWithOpenPopUp = markerLayer.getLayer(Session.get('markerWithOpenPopUpId'));
         markerWithOpenPopUp._popup.setContent(parent);
 }

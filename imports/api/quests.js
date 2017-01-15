@@ -49,4 +49,15 @@ Meteor.methods({
         });
     },
 
+  'quests.cancel'(questId){
+      Quests.update(
+        {_id :questId},
+        {$set: {
+              Status : "offen", 
+              assigneeId: "",
+              assigneeName: "",
+          }
+        });
+    },
+
 });

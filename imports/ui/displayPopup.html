@@ -27,21 +27,22 @@
             </tr>
             <tr>
                 <th><label>Status:</label></th>
-                <td>
-                    <select disabled name='state' id='state'>
-                    <option value='offen'>Offen</option>
-                    <option value='bearbeitung'>In Bearbeitung</option>
-                    <option value='erledigt'>Erledigt</option>
-                </select>
-                </td>
+                <td><label for='Status' id='db_status'><b>{{Status}}</b></label></td>
             </tr>
             <tr>
                  <th><label>Bearbeiter:</label></th>
                  <td><label for='assigneeName' id='db_assigneeName'>{{assigneeName}}</label></td>
              </tr>
             <tr>
+                {{#if isOwner}}
                 <td><input value='Bearbeiten' id='bearbeiten' type='submit'/></td>
+                {{/if}}
+                {{#if isAssignee}}
+                    <td><input value='Quest Abmelden' class='abmelden' type='button'/></td>
+                {{/if}}
+                {{#unless isTaken}}
                 <td><input value='Quest Annehmen' class='annehmen' type='button'/></td>
+                {{/unless}}
             </tr>
             </table>
     </form>

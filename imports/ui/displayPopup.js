@@ -4,12 +4,20 @@
 
   
   Template.displayPopup.helpers({
-    // quest: function () {
-    //     var questId = Session.get('m_id');
-    //     var selectedQuest = Quests.findOne({ _id: questId  });
-    //     console.log("Helper method called: " + questId);
-    //     return selectedQuest;
-    // }
+    isAssignee: function () {
+        return this.assigneeId === Meteor.userId();
+    },
+
+    isTaken: function () {
+		if (this.Status == "bearbeitung"){
+            return true;
+        }
+        return false;
+	},
+
+	isOwner: function () {
+		return this.owner.id === Meteor.userId();
+	}
   });
   
     Template.displayPopup.events({
@@ -32,5 +40,11 @@
             var openQuestId = Session.get('openQuestId');
             Meteor.call('quests.take', openQuestId, "bearbeitung");
             console.log("Quest (" + openQuestId + ") angenommen");
+        },
+
+        'click .abmelden'(event) {
+            var openQuestId = Session.get('openQuestId');
+            Meteor.call('quests.cancel', openQuestId);
+            console.log("Quest (" + openQuestId + ") abgemeldet");
         },
     });
