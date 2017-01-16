@@ -11,5 +11,8 @@
     "meteor-node-stubs": "~0.2.0",
     "mocha": "^3.2.0",
     "request": "^2.79.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
   }
 }
