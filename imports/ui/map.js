@@ -25,7 +25,9 @@ var customControl =  L.Control.extend({
     container.style.height = '30px';
 
     container.onclick = function(){
-        map.locate({setView: true, maxZoom: 19});
+        var currentPosition = Session.get('currentPosition');
+        console.log(currentPosition);
+        map.setView(currentPosition, 19);
     }
 
     return container;
@@ -45,6 +47,7 @@ var greenIcon = L.icon({
 var locationMarker;
 
 function onLocationFound(e) {
+    Session.set('currentPosition', e.latlng);
     if (locationMarker == null){
         locationMarker = L.marker(e.latlng, {icon: greenIcon});
         locationMarker.addTo(map);

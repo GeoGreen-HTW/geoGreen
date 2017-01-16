@@ -9,6 +9,7 @@ Meteor.startup(function() {
     Session.set('markerWithOpenPopUpId', undefined);
     Session.set('openQuestId', '');
     Session.set('markerLayer', undefined);
+    Session.set('currentPosition', undefined);
 
   $(window).resize(function() {
     $('#map').css('height', window.innerHeight - 82 - 45);
