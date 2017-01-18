@@ -20,7 +20,8 @@ Meteor.methods({
     quest.owner =  { id: this.userId, username: Meteor.users.findOne(this.userId).username};
     quest.createdAt = new Date();
 
-    Quests.insert(quest);
+    var id = Quests.insert(quest);
+    return id;
   },
 
   'quests.update'(id, status, tit, des, pr, aw, ze, k) {
