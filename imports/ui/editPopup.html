@@ -1,0 +1,61 @@
+<template name="editPopup" id="editPopup">
+    <form class="popUpForm" method="GET">
+        <center><big><input id="edit_title" type="text" value="{{title}}" required=""></big></center>
+        <table>
+            <tbody><tr>
+                <th><label for="Aktuelle Position"> Aktuelle Position:</label></th>
+                <td><label> {{location}} </label></td>
+            </tr>
+        </tbody></table>
+        <img id="img" src="{{imgpfad}}"><br>
+        <table>
+            <tbody><tr>
+                <th><label>Beschreibung:</label></th>
+                <td><input id="edit_beschreibung" type="text" value="{{description}}" required=""></td>
+            </tr>
+            <tr>
+                <th><label>Priorität:</label></th>
+                <td><select id="edit_prio" type="text">
+                    <option value="Dringend">Dringend</option>
+                    <option value="Hoch">Hoch</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Niedrig">Niedrig</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Arbeitsaufwand:</label></th>
+                <td><input id="edit_aufwand" type="text" value="{{Arbeitsaufwand}}">
+                <select id="edit_zeit" type="text">
+                    <option value="Stunden">Stunden</option>
+                    <option value="Tage">Tage</option>
+                    <option value="Monate">Monate</option>
+                    <option value="Jahre">Jahre</option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Kosten in Euro</label></th>
+                <td><input id="edit_kosten" type="text" value="{{Kosten}}"></td>
+            </tr>
+            <tr>
+                <th><label>Status:</label></th>
+                <td>
+                    <select name="state" id="state">
+                    <option value="offen">Offen</option>
+                    <option value="bearbeitung">In Bearbeitung</option>
+                    <option value="erledigt">Erledigt</option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                 <th><label>Bearbeiter:</label></th>
+                 <td><label for="assigneeName" id="db_assigneeName" >{{assigneeName}}</label></td>
+             </tr>
+            <tr>
+                <td><input value="aktualisieren" id="bearbeiten" type="submit"></td>
+                <td><input value="Quest Annehmen" class="annehmen" type="button"></td>
+            </tr>
+            </tbody></table>
+    </form>
+</template>
