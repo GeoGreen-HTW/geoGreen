@@ -22,6 +22,7 @@
                 Arbeitsaufwand:document.getElementById('arbeitsaufwand').value,
                 Zeiteinheit:document.getElementById('zeiteinheit').value,
                 Status: "offen",
+                Kategorie: document.getElementById('Kategorie').value,
                 Kosten:document.getElementById('kosten').value,
             };
 
