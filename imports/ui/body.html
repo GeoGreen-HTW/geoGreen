@@ -1,3 +1,38 @@
 <body>
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+             <table style="width:80%">
+                 <tr>
+                     <th class="logo-dov"><img alt="GeoGreen Logo" src="/images/logosuper2.png"/></th>
+                     <th><h2>GeoGreen</h2></th>
+                     <th style="margin-left: 5em;" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+                         <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Karte<span class="sr-only">(current)</span></a></li>
+                        </ul>
+                    </th>
+                    <th> 
+                         <ul class="loginButt right">
+                            {{>loginButtons}}
+                        </ul>
+                    </th>
+                 </tr>
+             </table>
+         </div><!-- /.container-fluid -->
+    </nav>
+</header>
+
+
+<div class="sitediv">
     {{> map}}
+</div>
+
+
+<footer class="col-lg-12">
+    <a href="" class="left">About</a>
+    <a href="" class="center">Impressum</a>
+    <a href="" class="right">Kontakt</a>
+</footer>
+
 </body>

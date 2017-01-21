@@ -1,13 +1,147 @@
 /* CSS declarations go here */
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
-body{
-  font-family: "Montserrat" ,sans-serif;
-  background-color: #4D7F17;
-  background-image: linear-gradient(to right, #6BB120, #AEFE57 100%);
-  background-attachment: fixed;
+body {
+    background-color: rgba(227, 232, 152, 0.78) !important;
+    font-family: "Montserrat", sans-serif;
 }
 
-.loginButt {
-    margin-left:1000px
+/* ------------ navigation --------------- */
+
+.navbar {
+    height: 70px;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    margin: 0 0 25px 0;
+    font-size: 27px;
+    background-image: linear-gradient(to bottom, rgb(234, 255, 213), rgba(104, 192, 78, 0.92) 100%);
 }
+
+li{
+    margin-right: 1.5em;
+    margin-top: 7px;
+/*    background: radial-gradient(
+            ellipse farthest-corner,
+            #e7e7e7 70%,
+            darkgrey 30%);*/
+}
+
+li a:link{
+    border-radius: 15px;
+    border-style: hidden;
+    width: 5em;
+    height: 2em;
+    text-align: center;
+
+}
+
+/* ------------------- ende ----------------- */
+
+
+/* ------------ logo -------- */
+img{
+    width: 2.5em;
+    height: 2.4em;
+}
+
+.logo-div{
+    padding-top: 0;
+    margin-top: -4px;
+}
+/* ------------------- ende ----------------- */
+
+
+/* ------------ login -------- */
+
+.loginButt{
+    width: 6em;
+    height: 25px;
+    border: 1px none rgba(227, 232, 152, 0.78);
+    background: none;
+    border-radius: 7px;
+    font-size: 19px;
+    margin-top: 1em !important;
+}
+
+/* ------------------- ende ----------------- */
+
+
+/* ------------karte--------------- */
+
+.sitediv{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.map {
+    width: 98.5%;
+    margin: 30px 15px 15px 15px;
+    height: 80%;
+    padding: 5px;
+}
+
+/* ------------------- ende ----------------- */
+
+/* ------------ Popup --------------- */
+
+.leaflet-popup-content-wrapper{
+  background-color: rgba(245, 247, 229, 0.89) !important;
+  width: 30em;
+}
+
+  th > label{
+  width: 8em;
+  margin-bottom: .8em;
+  margin-top: 8px;
+}
+
+td > button{
+  margin-top: 15px;
+}
+
+#zeiteinheit{
+  margin-left: 5px;
+  }
+
+
+/* ------------------- ende ----------------- */
+
+
+/* ------------------Footer--------------- */
+footer {
+    height: 20px;
+    background-image: linear-gradient(to bottom, rgba(116, 214, 87, 0.92), rgba(15, 114, 17, 0.76) 100%);
+    margin-top: 15px;
+    position: relative;
+    bottom: 0 !important;
+    font-size: 10px;
+}
+
+.left {
+    width: 33%;
+    float: left;
+    padding: 2px 0 0 10px;
+    margin: 0 auto 0 auto;
+    text-align: left;
+    color: black;
+}
+
+.center {
+    width: 33%;
+    float: left;
+    padding: 2px 0 0 0;
+    margin: 0 auto 0 auto;
+    text-align: center;
+    color: black;
+}
+
+.right {
+    width: auto;
+    float: right;
+    padding: 2px -100px 10 0;
+    margin: 0 auto 0 auto;
+    text-align: right;
+    color: #000000;
+}
+/* ------------------- ende ----------------- */
