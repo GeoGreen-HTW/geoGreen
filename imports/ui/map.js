@@ -21,8 +21,8 @@ var customControl =  L.Control.extend({
     container.style.backgroundColor = 'white';     
     container.style.backgroundImage = "url(/images/locate.png)";
     container.style.backgroundSize = "30px 30px";
-    container.style.width = '30px';
-    container.style.height = '30px';
+    container.style.width = '35px';
+    container.style.height = '35px';
 
     container.onclick = function(){
         var currentPosition = Session.get('currentPosition');
@@ -88,7 +88,7 @@ Template.map.rendered = function() {
 
     map.locate({setView: true, watch: true,  maxZoom: 19});
 
-    map.on('dblclick', function(event)
+    map.on('click', function(event)
     {
         m_long = event.latlng.lng;
         m_lat = event.latlng.lat;

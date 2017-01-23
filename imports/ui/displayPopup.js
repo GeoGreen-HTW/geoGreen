@@ -32,6 +32,12 @@
             parent.id = "popupContainer";
             Blaze.renderWithData(Template.editPopup, selectedQuest, parent);
 
+            var selects = parent.getElementsByTagName("select");            
+
+            selects[0].value = selectedQuest.Priorität;
+            selects[1].value = selectedQuest.Zeiteinheit;
+            selects[2].value = selectedQuest.Kategorie;
+
             var markerWithOpenPopUp = markerLayer.getLayer(Session.get('markerWithOpenPopUpId'));
             markerWithOpenPopUp._popup.setContent(parent);
         },
