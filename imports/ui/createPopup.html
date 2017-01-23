@@ -1,23 +1,24 @@
 <template name="createPopup" id="createPopup">
     <form class='createForm' method='POST'>
+        <h1>Erstelle hier einen Quest!</h1>
         <table>
             <tr>
                 <th><label for='Aktuelle Position'> Aktuelle Position:</label></th>
                 <td><label> {{current_pos}}</label></td>
             </tr>
             <tr>
-                <th><label for='Titel'>Titel:</label></th>
-                <td><input type='text' name='title' id='title' placeholder='Titel' required autofocus /></td>
+                <th><label for='Titel *'>Titel *:</label></th>
+                <td><input type='text' name='title' id='title' placeholder='Titel' width='300' required autofocus/></td>
             </tr>
         </table>
-        <img id='img' src='/images/bild_hochladen.gif' onclick='return uploadImg()'/>
+        <img class='size' id='img' src='/images/bild_hochladen.gif' onclick='return uploadImg()'/>
         <table>
             <tr>
-                <th><label for='Beschreibung'>Beschreibung:</label></th>
+                <th><label for='Beschreibung*'>Beschreibung *:</label></th>
                 <td><input type='text' name='Beschreibung' id='Beschreibung' placeholder='Beschreibung' required/></td>
             </tr>
             <tr>
-                <th><label for='Prioritaet'>Priorität:</label></th>
+                <th><label for='Prioritaet*'>Priorität:</label></th>
                     <td><select name='prio' id='prio'>
                         <option value='Dringend'>Dringend</option>
                         <option value='Hoch'>Hoch</option>
@@ -39,7 +40,8 @@
                 <td><input type='text' name='kosten' id='kosten' placeholder='Kosten in Euro'/></td>
             </tr>
             <tr>
-                <td><button type='submit'>Erstellen</button></td> 
+                <td><button type='submit'>Erstellen</button></td>
+                <td><button type='submit'>Eingaben löschen</button></td>
             </tr>
         </table>
         </form>

@@ -1,0 +1,24 @@
+createForm {
+        background: white;
+        width: 300 px;
+        border: 2 px solid;
+
+
+}
+form {
+        background: white;
+        border: black;
+        borderstyle:solid;
+        width: 20 px;
+        height: 20 px;
+ }
+
+size {
+        width: 20 px;
+        height: 20 px;
+}
+
+table {
+        color: black;
+        width: 370 px;
+}
