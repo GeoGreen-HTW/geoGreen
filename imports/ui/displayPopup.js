@@ -29,7 +29,7 @@
 	},
 
     image: function (){
-        return Images.findOne();
+        return Images.findOne({ _id: this.imageId });
     }
   });
   
