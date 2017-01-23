@@ -7,7 +7,12 @@
                 <td><label> {{location}} </label></td>
             </tr>
         </table>
-        <img id='img' src='{{imgpfad}}'/><br>
+        {{#with image}}
+        <!--<img id='img' src='{{imgpfad}}'/><br>-->
+            <div>
+                <a href="{{this.url}}" target="_blank"><img src="{{this.url store='images' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" alt="" class="thumbnail" /></a>
+            </div>
+        {{/with}}
         <table>
             <tr>
                 <th><label>Beschreibung:</label></th>

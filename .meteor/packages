@@ -24,3 +24,5 @@ practicalmeteor:mocha
 accounts-ui
 accounts-password
 session
+cfs:standard-packages
+cfs:gridfs
