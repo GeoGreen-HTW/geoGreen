@@ -40,7 +40,7 @@ li a:link{
 
 
 /* ------------ logo -------- */
-img{
+.logo{
     width: 2.5em;
     height: 2.4em;
 }
