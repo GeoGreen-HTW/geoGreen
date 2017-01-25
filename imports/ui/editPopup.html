@@ -7,7 +7,7 @@
                 <td><label> {{location}} </label></td>
             </tr>
         </tbody></table>
-        <img id="img" src="{{imgpfad}}"><br>
+        <!--<img id="img" src="{{imgpfad}}"><br>-->
         <table>
             <tbody><tr>
                 <th><label>Beschreibung:</label></th>
@@ -39,22 +39,20 @@
                 <td><input id="edit_kosten" type="text" value="{{Kosten}}"></td>
             </tr>
             <tr>
-                <th><label>Status:</label></th>
+                <th><label>Kategorie:</label></th>
                 <td>
-                    <select name="state" id="state">
-                    <option value="offen">Offen</option>
-                    <option value="bearbeitung">In Bearbeitung</option>
-                    <option value="erledigt">Erledigt</option>
+                    <select name='Kategorie' id='edit_kategorie'>
+                        <option value='Abfall'>Abfall</option>
+                        <option value='Pflanzen_und_Tiere'>Pflanzen und Tiere</option>
+                        <option value='Sondermüll'>Sondermüll</option>
+                        <option value='Bauvorhaben'>Bauvorhaben</option>
+                        <option value='Gesetzesvorhaben'>Gesetzesvorhaben</option>
+                        <option value='Sonstiges'>Sonstiges</option>
                 </select>
                 </td>
             </tr>
             <tr>
-                 <th><label>Bearbeiter:</label></th>
-                 <td><label for="assigneeName" id="db_assigneeName" >{{assigneeName}}</label></td>
-             </tr>
-            <tr>
                 <td><input value="aktualisieren" id="bearbeiten" type="submit"></td>
-                <td><input value="Quest Annehmen" class="annehmen" type="button"></td>
             </tr>
             </tbody></table>
     </form>

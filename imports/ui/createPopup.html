@@ -6,14 +6,15 @@
                 <td><label> {{current_pos}}</label></td>
             </tr>
             <tr>
-                <th><label for='Titel'>Titel:</label></th>
+                <th><label for='Titel'>Titel:<sup>*</sup></label></th>
                 <td><input type='text' name='title' id='title' placeholder='Titel' required autofocus /></td>
             </tr>
         </table>
-        <img id='popupImg' src='/images/bild_hochladen.gif' onclick='return uploadImg()'/>
+          <img src='/images/bild_hochladen.gif'/>
+          <input type="file" name="myFileInput" id="myFileInput" accept="image/*">
         <table>
             <tr>
-                <th><label for='Beschreibung'>Beschreibung:</label></th>
+                <th><label for='Beschreibung'>Beschreibung:<sup>*</sup></label></th>
                 <td><input type='text' name='Beschreibung' id='Beschreibung' placeholder='Beschreibung' required/></td>
             </tr>
             <tr>
@@ -35,9 +36,23 @@
                 </select></td>
             </tr>
             <tr>
+                <th><label for='Kategorie'>Kategorie:</label></th>
+                <td>
+                    <select name='Kategorie' id='Kategorie'>
+                        <option value='Abfall'>Abfall</option>
+                        <option value='Pflanzen_und_Tiere'>Pflanzen und Tiere</option>
+                        <option value='Sondermüll'>Sondermüll</option>
+                        <option value='Bauvorhaben'>Bauvorhaben</option>
+                        <option value='Gesetzesvorhaben'>Gesetzesvorhaben</option>
+                        <option value='Sonstiges'>Sonstiges</option>
+                </select>
+                </td>
+            </tr>
+            <tr>
                 <th><label for='Kosten'>Kosten in Euro:</label></th>
                 <td><input type='text' name='kosten' id='kosten' placeholder='Kosten in Euro'/></td>
             </tr>
+            <p id="neccessary" class="right"> <sup>*</sup> Pflichtfelder</p>
             <tr>
                 <td><button type='submit'>Erstellen</button></td>
             </tr>

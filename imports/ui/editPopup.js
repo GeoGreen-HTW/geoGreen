@@ -1,8 +1,8 @@
-  import './editPopup.html';
+import './editPopup.html';
   import { Quests } from '../api/quests.js';
   import { Session } from 'meteor/session';
 
-  
+
   Template.editPopup.helpers({
     // quest: function () {
     //     var questId = Session.get('m_id');
@@ -27,10 +27,11 @@
             var pr = document.getElementById('edit_prio').value;
             var aw =  document.getElementById('edit_aufwand').value;
             var ze = document.getElementById('edit_zeit').value;
+            var ka = document.getElementById('edit_kategorie').value;
             var k = document.getElementById('edit_kosten').value;
-            
+
             var questId = Session.get('openQuestId');
-            Meteor.call("quests.update", questId, status, tit, des, pr, aw, ze, k);
+            Meteor.call("quests.update", questId, status, tit, des, pr, aw, ze,ka, k);
         },
 
         'click .annehmen'(event) {
@@ -38,4 +39,4 @@
           Meteor.call('quests.take', openQuestId, "bearbeitung");
           console.log("Quest (" + openQuestId + ") angenommen");
         },
-    });
+});

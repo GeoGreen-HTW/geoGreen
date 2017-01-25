@@ -23,7 +23,7 @@ Meteor.methods({
     Quests.insert(quest);
   },
 
-  'quests.update'(id, status, tit, des, pr, aw, ze, k) {
+  'quests.update'(id, status, tit, des, pr, aw, ze,ka, k) {
       Quests.update(
       {_id :id},
       {$set: {
@@ -33,6 +33,7 @@ Meteor.methods({
             Priorität:pr,
             Arbeitsaufwand:aw,
             Zeiteinheit:ze,
+            Kategorie:ka,
             Kosten:k
         }
     });

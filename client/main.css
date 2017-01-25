@@ -3,7 +3,7 @@
 
 body {
     background-color: rgba(227, 232, 152, 0.78) !important;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat", sans-serif!important;
 }
 
 /* ------------ navigation --------------- */
@@ -28,40 +28,53 @@ li{
 }
 
 li a:link{
+    padding-top: 18px;
     border-radius: 15px;
     border-style: hidden;
     width: 5em;
-    height: 2em;
+    height: 55px;
     text-align: center;
-
+    color: #888;
 }
 
 /* ------------------- ende ----------------- */
 
 
 /* ------------ logo -------- */
-img{
+#logo{
     width: 2.5em;
     height: 2.4em;
 }
 
 .logo-div{
     padding-top: 0;
-    margin-top: -4px;
+    margin-top: 2px;
+}
+
+#geoGreen{
+  margin-top: -3px;
 }
 /* ------------------- ende ----------------- */
 
 
 /* ------------ login -------- */
+.glyphicon{
+  color: #337ab7;
+  margin-right:5px;
+}
 
 .loginButt{
     width: 6em;
     height: 25px;
-    border: 1px none rgba(227, 232, 152, 0.78);
+    border: 1px none;
     background: none;
     border-radius: 7px;
     font-size: 19px;
     margin-top: 1em !important;
+}
+
+.login-link-and-dropdown-list{
+  margin-right: 6em;
 }
 
 /* ------------------- ende ----------------- */
@@ -88,6 +101,7 @@ img{
 .leaflet-popup-content-wrapper{
   background-color: rgba(245, 247, 229, 0.89) !important;
   width: 30em;
+  border: 2px solid darkgrey;
 }
 
   th > label{
@@ -98,12 +112,28 @@ img{
 
 td > button{
   margin-top: 15px;
+  margin-right: 5px;
+  padding: 3px 7px 3px 7px;
+}
+
+form > img{
+  height:200px;
+  width:200px;
+  margin: 4px 0 4px 0;
+}
+
+sup{
+  color: red;
 }
 
 #zeiteinheit{
   margin-left: 5px;
   }
 
+  #neccessary{
+    font-size: 10px;
+    margin: 0!important;
+  }
 
 /* ------------------- ende ----------------- */
 

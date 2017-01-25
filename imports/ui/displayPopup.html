@@ -3,11 +3,14 @@
         <center><big><label id='db_title' >{{title}}</label></big></center>
         <table>
             <tr>
-                <th><label id="location" for='Aktuelle Position'> Aktuelle Position:</label></th>
+                <th><label for='Aktuelle Position'> Aktuelle Position:</label></th>
                 <td><label> {{location}} </label></td>
             </tr>
         </table>
-        <img id='img' src='{{imgpfad}}'/><br>
+        {{#with image}}
+        <!--<img id='img' src='{{imgpfad}}'/><br>-->
+                <a href="{{this.url}}" target="_blank"><img src="{{this.url store='images' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" alt="" class="thumbnail"/></a>
+        {{/with}}
         <table>
             <tr>
                 <th><label>Beschreibung:</label></th>
@@ -24,6 +27,10 @@
             <tr>
                 <th><label>Kosten in Euro</label></th>
                 <td><label for='Kosten' id='db_kosten'>{{Kosten}}</label></td>
+            </tr>
+            <tr>
+                <th><label>Kategorie:</label></th>
+                <td><label for='kategorie' id='db_kategorie'>{{Kategorie}}</label></td>
             </tr>
             <tr>
                 <th><label>Status:</label></th>

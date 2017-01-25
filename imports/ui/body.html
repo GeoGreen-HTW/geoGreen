@@ -1,38 +1,35 @@
 <body>
-<header>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header col-lg-1">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="#">
-                    <div class="logo-dov">
-                        <img alt="GeoGreen Logo" src="/images/logosuper2.png">
-                    </div>
-                </a>
-            </div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="logo-div col-2">
+        <a href="#">
+           <img alt="GeoGreen Logo" id="logo" src="/images/logosuper2.png">
+      </a>
+    </div>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <div class="navbar-header col-lg-2 hidden-xs" id="geoGreen">
+            <h2>GeoGreen</h2>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Karte</a></li>
 
-            <div class="navbar-header col-lg-1">
-                  <h2>GeoGreen</h2>
-            </div>
-
-            <div style="margin-left: 5em;" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Karte<span class="sr-only">(current)</span></a></li>
-                </ul>
-                <div>
-                  <button class="loginButt right">{{>loginButtons}}</button>
-                </div>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-</header>
+        <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span></a></li> -->
+      </ul>
+      <ul class="loginButt right">
+        <span class="glyphicon glyphicon-log-in"></span>
+       {{>loginButtons}}
+    </ul>
+    </div>
+  </div>
+</nav>
 
 
 <div class="sitediv">
@@ -41,9 +38,9 @@
 
 
 <footer class="col-lg-12">
-    <a href="" class="left">About</a>
-    <a href="" class="center">Impressum</a>
-    <a href="" class="right">Kontakt</a>
+    <a href="about.html" class="left">About</a>
+    <a href="impressum.html" class="center">Impressum</a>
+    <a href="contact.html" class="right">Kontakt</a>
 </footer>
 
 </body>
