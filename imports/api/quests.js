@@ -23,11 +23,10 @@ Meteor.methods({
     Quests.insert(quest);
   },
 
-  'quests.update'(id, status, tit, des, pr, aw, ze,ka, k) {
+  'quests.update'(id, tit, des, pr, aw, ze,ka, k) {
       Quests.update(
       {_id :id},
       {$set: {
-            Status : status, 
             title: tit,
             description:des,
             Priorität:pr,

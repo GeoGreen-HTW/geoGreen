@@ -46,7 +46,7 @@ import './createPopup.html';
 
                 map.closePopup();
                 console.log("Quest created!");
-            }, 2000);
+            }, 1000);
         },
 
         'change #myFileInput': function(event) {

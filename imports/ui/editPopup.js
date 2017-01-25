@@ -17,16 +17,16 @@ import './editPopup.html';
             event.preventDefault();
 
             //Update Datenbank
-            var status = document.getElementById("state").value;
             var tit = document.getElementById("edit_title").value;
             var des = document.getElementById('edit_beschreibung').value;
             var pr = document.getElementById('edit_prio').value;
+            var aw =  document.getElementById('edit_aufwand').value;
             var ze = document.getElementById('edit_zeit').value;
             var ka = document.getElementById('edit_kategorie').value;
             var k = document.getElementById('edit_kosten').value;
 
             var questId = Session.get('openQuestId');
-            Meteor.call("quests.update", questId, status, tit, des, pr, aw, ze,ka, k);
+            Meteor.call("quests.update", questId, tit, des, pr, aw, ze,ka, k);
         },
 
         'click .annehmen'(event) {
