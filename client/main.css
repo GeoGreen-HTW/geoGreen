@@ -98,10 +98,17 @@ li a:link{
 
 /* ------------ Popup --------------- */
 
+
+form > h3 {
+  margin-top: 0;
+}
+
 .leaflet-popup-content-wrapper{
   background-color: rgba(245, 247, 229, 0.89) !important;
-  width: 31em;
+  width: 32em;
+  height: 40em;
   border: 2px solid darkgrey;
+  overflow-x: auto;
 }
 
   th > label{
@@ -110,16 +117,36 @@ li a:link{
   margin-top: 8px;
 }
 
-td > button{
-  margin-top: 15px;
+#create{
+  margin-top: 10px;
   margin-right: 5px;
+  padding: 4px 8px 4px 8px;
+}
+
+#bearbeiten{
+  margin-top: 8px;
+  margin: auto 5px auto 60%;
   padding: 3px 7px 3px 7px;
 }
 
-form > img{
-  height:200px;
-  width:200px;
-  margin: 4px 0 4px 0;
+.annehmen{
+  margin-top: 8px;
+  margin: auto 5px auto 60%;
+  padding: 3px 7px 3px 7px;
+}
+
+#myFileInput{
+  margin-bottom: 8px;
+}
+
+form > h3 {
+  margin-left: 20%;
+}
+
+.leaflet-popup-close-button{
+  margin: 5px 18px auto auto;
+  color: #6D9CD2!important;
+  font-size: 18px!important;
 }
 
 sup{
@@ -133,6 +160,12 @@ sup{
   #neccessary{
     font-size: 10px;
     margin: 0!important;
+  }
+
+  #img{
+    height:200px;
+    width:200px;
+    margin: 4px 0 4px 0;
   }
 
 /* ------------------- ende ----------------- */

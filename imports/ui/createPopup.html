@@ -1,5 +1,6 @@
 <template name="createPopup" id="createPopup">
     <form class='createForm' method='POST'>
+      <h3>Erstelle eine Quest.</h3>
         <table>
             <tr>
                 <th><label for='Aktuelle Position'> Aktuelle Position:</label></th>
@@ -10,7 +11,7 @@
                 <td><input type='text' name='title' id='title' placeholder='Titel' required autofocus /></td>
             </tr>
         </table>
-          <img src='/images/bild_hochladen.gif'/>
+          <img id="img" src='/images/bild_hochladen.gif'/>
           <input type="file" name="myFileInput" id="myFileInput" accept="image/*">
         <table>
             <tr>
@@ -52,10 +53,10 @@
                 <th><label for='Kosten'>Kosten in Euro:</label></th>
                 <td><input type='text' name='kosten' id='kosten' placeholder='Kosten in Euro'/></td>
             </tr>
-            <p id="neccessary" class="right"> <sup>*</sup> Pflichtfelder</p>
-            <tr>
-                <td><button type='submit'>Erstellen</button></td>
-            </tr>
+            <p id="neccessary"> <sup>*</sup> Pflichtfelder</p>
         </table>
+          <div class="center" style="float:none">
+              <button id="create" type='submit'>Erstellen</button>
+          </div>
         </form>
 </template>

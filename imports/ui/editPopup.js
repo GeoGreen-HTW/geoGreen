@@ -16,16 +16,11 @@ import './editPopup.html';
             // Prevent default browser form submit
             event.preventDefault();
 
-            document.getElementById("state").disabled = true;
-            // document.getElementById("bearbeiten").value = "Bearbeiten";
-
-
             //Update Datenbank
             var status = document.getElementById("state").value;
             var tit = document.getElementById("edit_title").value;
             var des = document.getElementById('edit_beschreibung').value;
             var pr = document.getElementById('edit_prio').value;
-            var aw =  document.getElementById('edit_aufwand').value;
             var ze = document.getElementById('edit_zeit').value;
             var ka = document.getElementById('edit_kategorie').value;
             var k = document.getElementById('edit_kosten').value;
