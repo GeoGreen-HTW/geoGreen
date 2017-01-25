@@ -1,0 +1,60 @@
+<template name="createPopup" id="createPopup">
+    <form class='createForm' method='POST'>
+        <table>
+            <tr>
+                <th><label for='Aktuelle Position'> Aktuelle Position:</label></th>
+                <td><label> {{current_pos}}</label></td>
+            </tr>
+            <tr>
+                <th><label for='Titel'>Titel:</label></th>
+                <td><input type='text' name='title' id='title' placeholder='Titel' required autofocus /></td>
+            </tr>
+        </table>
+        <img id='img' src='/images/bild_hochladen.gif' height="250" width="250"/>
+        <input type="file" name="myFileInput" id="myFileInput" accept="image/*">
+        <table>
+            <tr>
+                <th><label for='Beschreibung'>Beschreibung:</label></th>
+                <td><input type='text' name='Beschreibung' id='Beschreibung' placeholder='Beschreibung' required/></td>
+            </tr>
+            <tr>
+                <th><label for='Prioritaet'>Priorität:</label></th>
+                    <td><select name='prio' id='prio'>
+                        <option value='Dringend'>Dringend</option>
+                        <option value='Hoch'>Hoch</option>
+                        <option value='Normal'>Normal</option>
+                        <option value='Niedrig'>Niedrig</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <th><label for='Aufwand'>Arbeitsaufwand:</label></th>
+                <td><input type='text' name='arbeitsaufwand' id='arbeitsaufwand' placeholder='Arbeitsaufwand' ><select name='aufwandzeiteinheit' id='zeiteinheit'>
+                    <option value='Stunden'>Stunden</option>
+                    <option value='Tage'>Tage</option>
+                    <option value='Monate'>Monate</option>
+                    <option value='Jahre'>Jahre</option>
+                </select></td>
+            </tr>
+            <tr>
+                <th><label for='Kategorie'>Kategorie:</label></th>
+                <td>
+                    <select name='Kategorie' id='Kategorie'>
+                        <option value='Abfall'>Abfall</option>
+                        <option value='Pflanzen_und_Tiere'>Pflanzen und Tiere</option>
+                        <option value='Sondermüll'>Sondermüll</option>
+                        <option value='Bauvorhaben'>Bauvorhaben</option>
+                        <option value='Gesetzesvorhaben'>Gesetzesvorhaben</option>
+                        <option value='Sonstiges'>Sonstiges</option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <th><label for='Kosten'>Kosten in Euro:</label></th>
+                <td><input type='text' name='kosten' id='kosten' placeholder='Kosten in Euro'/></td>
+            </tr>
+            <tr>
+                <td><button type='submit'>Erstellen</button></td> 
+            </tr>
+        </table>
+        </form>
+</template>

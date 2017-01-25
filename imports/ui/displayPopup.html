@@ -1,0 +1,58 @@
+<template name="displayPopup" id="displayPopup">
+    <form class='popUpForm' method='GET'>
+        <center><big><label id='db_title' >{{title}}</label></big></center>
+        <table>
+            <tr>
+                <th><label for='Aktuelle Position'> Aktuelle Position:</label></th>
+                <td><label> {{location}} </label></td>
+            </tr>
+        </table>
+        {{#with image}}
+        <!--<img id='img' src='{{imgpfad}}'/><br>-->
+            <div>
+                <a href="{{this.url}}" target="_blank"><img src="{{this.url store='images' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" alt="" class="thumbnail" height="250" width="250"/></a>
+            </div>
+        {{/with}}
+        <table>
+            <tr>
+                <th><label>Beschreibung:</label></th>
+                <td><label for='Beschreibung' id='db_beschreibung'>{{description}}</label></td>
+            </tr>
+            <tr>
+                <th><label>Priorität:</label></th>
+                <td><label for='Prioritaet' id='db_prio'>{{Priorität}}</label></td>
+            </tr>
+            <tr>
+                <th><label>Arbeitsaufwand:</label></th>
+                <td><label for='Aufwand' id='db_aufwand'>{{Arbeitsaufwand}} </label><label id='db_zeiteinheit'> {{Zeiteinheit}}</label></td>
+            </tr>
+            <tr>
+                <th><label>Kosten in Euro</label></th>
+                <td><label for='Kosten' id='db_kosten'>{{Kosten}}</label></td>
+            </tr>
+            <tr>
+                <th><label>Kategorie:</label></th>
+                <td><label for='kategorie' id='db_kategorie'>{{Kategorie}}</label></td>
+            </tr>
+            <tr>
+                <th><label>Status:</label></th>
+                <td><label for='Status' id='db_status'><b>{{Status}}</b></label></td>
+            </tr>
+            <tr>
+                 <th><label>Bearbeiter:</label></th>
+                 <td><label for='assigneeName' id='db_assigneeName'>{{assigneeName}}</label></td>
+             </tr>
+            <tr>
+                {{#if isOwner}}
+                <td><input value='Bearbeiten' id='bearbeiten' type='submit'/></td>
+                {{/if}}
+                {{#if isAssignee}}
+                    <td><input value='Quest Abmelden' class='abmelden' type='button'/></td>
+                {{/if}}
+                {{#unless isTaken}}
+                <td><input value='Quest Annehmen' class='annehmen' type='button'/></td>
+                {{/unless}}
+            </tr>
+            </table>
+    </form>
+</template>

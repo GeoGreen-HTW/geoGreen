@@ -1,0 +1,59 @@
+<template name="editPopup" id="editPopup">
+    <form class="popUpForm" method="GET">
+        <center><big><input id="edit_title" type="text" value="{{title}}" required=""></big></center>
+        <table>
+            <tbody><tr>
+                <th><label for="Aktuelle Position"> Aktuelle Position:</label></th>
+                <td><label> {{location}} </label></td>
+            </tr>
+        </tbody></table>
+        <!--<img id="img" src="{{imgpfad}}"><br>-->
+        <table>
+            <tbody><tr>
+                <th><label>Beschreibung:</label></th>
+                <td><input id="edit_beschreibung" type="text" value="{{description}}" required=""></td>
+            </tr>
+            <tr>
+                <th><label>Priorität:</label></th>
+                <td><select id="edit_prio" type="text">
+                    <option value="Dringend">Dringend</option>
+                    <option value="Hoch">Hoch</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Niedrig">Niedrig</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Arbeitsaufwand:</label></th>
+                <td><input id="edit_aufwand" type="text" value="{{Arbeitsaufwand}}">
+                <select id="edit_zeit" type="text">
+                    <option value="Stunden">Stunden</option>
+                    <option value="Tage">Tage</option>
+                    <option value="Monate">Monate</option>
+                    <option value="Jahre">Jahre</option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Kosten in Euro</label></th>
+                <td><input id="edit_kosten" type="text" value="{{Kosten}}"></td>
+            </tr>
+            <tr>
+                <th><label>Kategorie:</label></th>
+                <td>
+                    <select name='Kategorie' id='edit_kategorie'>
+                        <option value='Abfall'>Abfall</option>
+                        <option value='Pflanzen_und_Tiere'>Pflanzen und Tiere</option>
+                        <option value='Sondermüll'>Sondermüll</option>
+                        <option value='Bauvorhaben'>Bauvorhaben</option>
+                        <option value='Gesetzesvorhaben'>Gesetzesvorhaben</option>
+                        <option value='Sonstiges'>Sonstiges</option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <td><input value="aktualisieren" id="bearbeiten" type="submit"></td>
+            </tr>
+            </tbody></table>
+    </form>
+</template>

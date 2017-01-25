@@ -22,4 +22,43 @@ Meteor.methods({
 
     Quests.insert(quest);
   },
+
+  'quests.update'(id, status, tit, des, pr, aw, ze,ka, k) {
+      Quests.update(
+      {_id :id},
+      {$set: {
+            Status : status, 
+            title: tit,
+            description:des,
+            Priorität:pr,
+            Arbeitsaufwand:aw,
+            Zeiteinheit:ze,
+            Kategorie:ka,
+            Kosten:k
+        }
+    });
+  },
+
+  'quests.take'(questId, status){
+      Quests.update(
+        {_id :questId},
+        {$set: {
+              Status : status, 
+              assigneeId: this.userId,
+              assigneeName: Meteor.users.findOne(this.userId).username,
+          }
+        });
+    },
+
+  'quests.cancel'(questId){
+      Quests.update(
+        {_id :questId},
+        {$set: {
+              Status : "offen", 
+              assigneeId: "",
+              assigneeName: "",
+          }
+        });
+    },
+
 });
