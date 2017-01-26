@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20170126 10:17:50.219" generator="Robot 3.0.1 (Python 2.7.13 on win32)">
+<suite source="C:\Users\admin\Documents\BUI\Werkzeuge BUI\tests\geoGreen\Login.robot" id="s1" name="Login">
+<test id="s1-t1" name="Valid login">
+<kw name="Given Open Firefox at GG">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>${Page}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20170126 10:17:51.230" level="INFO">Opening browser 'firefox' to base url 'http://localhost:3000/'</msg>
+<status status="PASS" endtime="20170126 10:18:01.699" starttime="20170126 10:17:51.229"></status>
+</kw>
+<kw name="Title Should Be" library="Selenium2Library">
+<doc>Verifies that current page title equals `title`.</doc>
+<arguments>
+<arg>GeoGreen</arg>
+</arguments>
+<msg timestamp="20170126 10:18:01.712" level="INFO">Page title is 'GeoGreen'.</msg>
+<status status="PASS" endtime="20170126 10:18:01.712" starttime="20170126 10:18:01.699"></status>
+</kw>
+<status status="PASS" endtime="20170126 10:18:01.713" starttime="20170126 10:17:51.227"></status>
+</kw>
+<kw name="When Sign in with valid user">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>id=login-sign-in-link</arg>
+</arguments>
+<status status="PASS" endtime="20170126 10:18:01.728" starttime="20170126 10:18:01.714"></status>
+</kw>
+<kw name="Click Link" library="Selenium2Library">
+<doc>Clicks a link identified by locator.</doc>
+<arguments>
+<arg>id=login-sign-in-link</arg>
+</arguments>
+<msg timestamp="20170126 10:18:01.729" level="INFO">Clicking link 'id=login-sign-in-link'.</msg>
+<status status="PASS" endtime="20170126 10:18:01.851" starttime="20170126 10:18:01.729"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>id=login-username-or-email</arg>
+<arg>${validuser}</arg>
+</arguments>
+<msg timestamp="20170126 10:18:01.852" level="INFO">Typing text 'tester' into text field 'id=login-username-or-email'</msg>
+<status status="PASS" endtime="20170126 10:18:02.041" starttime="20170126 10:18:01.851"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>id=login-password</arg>
+<arg>${validpass}</arg>
+</arguments>
+<msg timestamp="20170126 10:18:02.043" level="INFO">Typing text 'testtest' into text field 'id=login-password'</msg>
+<status status="PASS" endtime="20170126 10:18:02.161" starttime="20170126 10:18:02.042"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>login-buttons-password</arg>
+</arguments>
+<msg timestamp="20170126 10:18:02.162" level="INFO">Clicking element 'login-buttons-password'.</msg>
+<status status="PASS" endtime="20170126 10:18:02.204" starttime="20170126 10:18:02.162"></status>
+</kw>
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>login-name-link</arg>
+</arguments>
+<status status="PASS" endtime="20170126 10:18:03.065" starttime="20170126 10:18:02.205"></status>
+</kw>
+<status status="PASS" endtime="20170126 10:18:03.066" starttime="20170126 10:18:01.713"></status>
+</kw>
+<kw name="Then User is Logged in">
+<kw name="Element Should Contain" library="Selenium2Library">
+<doc>Verifies element identified by `locator` contains text `expected`.</doc>
+<arguments>
+<arg>login-name-link</arg>
+<arg>${validuser}</arg>
+</arguments>
+<msg timestamp="20170126 10:18:03.070" level="INFO">Verifying element 'login-name-link' contains text 'tester'.</msg>
+<status status="PASS" endtime="20170126 10:18:03.101" starttime="20170126 10:18:03.069"></status>
+</kw>
+<status status="PASS" endtime="20170126 10:18:03.102" starttime="20170126 10:18:03.068"></status>
+</kw>
+<status status="PASS" endtime="20170126 10:18:03.104" critical="yes" starttime="20170126 10:17:51.225"></status>
+</test>
+<test id="s1-t2" name="Invalid login: wrong password">
+<kw name="Given Open Firefox at GG">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>${Page}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20170126 10:18:03.110" level="INFO">Opening browser 'firefox' to base url 'http://localhost:3000/'</msg>
+<status status="PASS" endtime="20170126 10:18:13.621" starttime="20170126 10:18:03.109"></status>
+</kw>
+<kw name="Title Should Be" library="Selenium2Library">
+<doc>Verifies that current page title equals `title`.</doc>
+<arguments>
+<arg>GeoGreen</arg>
+</arguments>
+<msg timestamp="20170126 10:18:13.632" level="INFO">Page title is 'GeoGreen'.</msg>
+<status status="PASS" endtime="20170126 10:18:13.633" starttime="20170126 10:18:13.621"></status>
+</kw>
+<status status="PASS" endtime="20170126 10:18:13.633" starttime="20170126 10:18:03.109"></status>
+</kw>
+<kw name="When Sign in with invalid password">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>id=login-sign-in-link</arg>
+</arguments>
+<status status="PASS" endtime="20170126 10:18:13.650" starttime="20170126 10:18:13.638"></status>
+</kw>
+<kw name="Click Link" library="Selenium2Library">
+<doc>Clicks a link identified by locator.</doc>
+<arguments>
+<arg>id=login-sign-in-link</arg>
+</arguments>
+<msg timestamp="20170126 10:18:13.651" level="INFO">Clicking link 'id=login-sign-in-link'.</msg>
+<status status="PASS" endtime="20170126 10:18:13.728" starttime="20170126 10:18:13.650"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>id=login-username-or-email</arg>
+<arg>${validuser}</arg>
+</arguments>
+<msg timestamp="20170126 10:18:13.729" level="INFO">Typing text 'tester' into text field 'id=login-username-or-email'</msg>
+<status status="PASS" endtime="20170126 10:18:14.000" starttime="20170126 10:18:13.728"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>id=login-password</arg>
+<arg>${invalidpass}</arg>
+</arguments>
+<msg timestamp="20170126 10:18:14.001" level="INFO">Typing text 'itest' into text field 'id=login-password'</msg>
+<status status="PASS" endtime="20170126 10:18:14.113" starttime="20170126 10:18:14.000"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>login-buttons-password</arg>
+</arguments>
+<msg timestamp="20170126 10:18:14.114" level="INFO">Clicking element 'login-buttons-password'.</msg>
+<status status="PASS" endtime="20170126 10:18:14.169" starttime="20170126 10:18:14.114"></status>
+</kw>
+<kw name="Page Should Contain" library="Selenium2Library">
+<doc>Verifies that current page contains `text`.</doc>
+<arguments>
+<arg>password</arg>
+</arguments>
+<msg timestamp="20170126 10:18:14.312" level="INFO">Current page contains text 'password'.</msg>
+<status status="PASS" endtime="20170126 10:18:14.313" starttime="20170126 10:18:14.169"></status>
+</kw>
+<status status="PASS" endtime="20170126 10:18:14.313" starttime="20170126 10:18:13.637"></status>
+</kw>
+<kw name="Then User is not signed in">
+<kw name="Page Should Not Contain Element" library="Selenium2Library">
+<doc>Verifies element identified by `locator` is not found on the current page.</doc>
+<arguments>
+<arg>login-name-link</arg>
+</arguments>
+<msg timestamp="20170126 10:18:14.383" level="INFO">Current page does not contain element 'login-name-link'.</msg>
+<status status="PASS" endtime="20170126 10:18:14.383" starttime="20170126 10:18:14.372"></status>
+</kw>
+<status status="PASS" endtime="20170126 10:18:14.384" starttime="20170126 10:18:14.371"></status>
+</kw>
+<status status="PASS" endtime="20170126 10:18:14.412" critical="yes" starttime="20170126 10:18:03.107"></status>
+</test>
+<test id="s1-t3" name="Invalid login: wrong username">
+<kw name="Given Open Firefox at GG">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>${Page}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20170126 10:18:14.421" level="INFO">Opening browser 'firefox' to base url 'http://localhost:3000/'</msg>
+<status status="PASS" endtime="20170126 10:18:24.253" starttime="20170126 10:18:14.420"></status>
+</kw>
+<kw name="Title Should Be" library="Selenium2Library">
+<doc>Verifies that current page title equals `title`.</doc>
+<arguments>
+<arg>GeoGreen</arg>
+</arguments>
+<msg timestamp="20170126 10:18:24.264" level="INFO">Page title is 'GeoGreen'.</msg>
+<status status="PASS" endtime="20170126 10:18:24.265" starttime="20170126 10:18:24.254"></status>
+</kw>
+<status status="PASS" endtime="20170126 10:18:24.265" starttime="20170126 10:18:14.419"></status>
+</kw>
+<kw name="When Sign in with invalid username">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>id=login-sign-in-link</arg>
+</arguments>
+<status status="PASS" endtime="20170126 10:18:24.286" starttime="20170126 10:18:24.272"></status>
+</kw>
+<kw name="Click Link" library="Selenium2Library">
+<doc>Clicks a link identified by locator.</doc>
+<arguments>
+<arg>id=login-sign-in-link</arg>
+</arguments>
+<msg timestamp="20170126 10:18:24.287" level="INFO">Clicking link 'id=login-sign-in-link'.</msg>
+<status status="PASS" endtime="20170126 10:18:24.400" starttime="20170126 10:18:24.287"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>id=login-username-or-email</arg>
+<arg>${invaliduser}</arg>
+</arguments>
+<msg timestamp="20170126 10:18:24.402" level="INFO">Typing text 'i test' into text field 'id=login-username-or-email'</msg>
+<status status="PASS" endtime="20170126 10:18:24.587" starttime="20170126 10:18:24.401"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>id=login-password</arg>
+<arg>${validpass}</arg>
+</arguments>
+<msg timestamp="20170126 10:18:24.588" level="INFO">Typing text 'testtest' into text field 'id=login-password'</msg>
+<status status="PASS" endtime="20170126 10:18:24.702" starttime="20170126 10:18:24.587"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>login-buttons-password</arg>
+</arguments>
+<msg timestamp="20170126 10:18:24.703" level="INFO">Clicking element 'login-buttons-password'.</msg>
+<status status="PASS" endtime="20170126 10:18:24.747" starttime="20170126 10:18:24.702"></status>
+</kw>
+<kw name="Page Should Contain" library="Selenium2Library">
+<doc>Verifies that current page contains `text`.</doc>
+<arguments>
+<arg>User not found</arg>
+</arguments>
+<msg timestamp="20170126 10:18:24.877" level="INFO">Current page contains text 'User not found'.</msg>
+<status status="PASS" endtime="20170126 10:18:24.877" starttime="20170126 10:18:24.747"></status>
+</kw>
+<status status="PASS" endtime="20170126 10:18:24.877" starttime="20170126 10:18:24.271"></status>
+</kw>
+<kw name="Then User is not signed in">
+<kw name="Page Should Not Contain Element" library="Selenium2Library">
+<doc>Verifies element identified by `locator` is not found on the current page.</doc>
+<arguments>
+<arg>login-name-link</arg>
+</arguments>
+<msg timestamp="20170126 10:18:24.886" level="INFO">Current page does not contain element 'login-name-link'.</msg>
+<status status="PASS" endtime="20170126 10:18:24.886" starttime="20170126 10:18:24.879"></status>
+</kw>
+<status status="PASS" endtime="20170126 10:18:24.887" starttime="20170126 10:18:24.878"></status>
+</kw>
+<status status="PASS" endtime="20170126 10:18:24.887" critical="yes" starttime="20170126 10:18:14.417"></status>
+</test>
+<status status="PASS" endtime="20170126 10:18:24.890" starttime="20170126 10:17:50.225"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="0" pass="3">Critical Tests</stat>
+<stat fail="0" pass="3">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="0" id="s1" name="Login" pass="3">Login</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

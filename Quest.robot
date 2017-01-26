@@ -3,7 +3,7 @@ Quest.robot
 Library  Selenium2Library
 
 ***Variables***
-${Page}  http://141.45.92.211:3000/
+${Page}  http://localhost:3000/
 ${BROWSER}  firefox
 ${validuser}  tester
 ${validpass}  testtest
@@ -36,7 +36,7 @@ delete Quest
 ***Keywords***
 Open Firefox at GG
 	Open Browser  ${Page}  ${BROWSER}
-	Title should be  geogreen
+	Title should be  GeoGreen
 
 Sign in with valid user
 	Wait Until Page Contains Element  id=login-sign-in-link
